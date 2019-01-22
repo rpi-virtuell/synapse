@@ -151,6 +151,11 @@ class ClientIpStore(background_updates.BackgroundUpdateStore):
         else:
             last = False
 
+        logger.info(
+            "Scanning for duplicate 'user_ips' rows in range: %s <= last_seen < %s",
+            begin_last_seen, end_last_seen,
+        )
+
         def remove(txn, begin_last_seen, end_last_seen):
             # This works by looking at all entries in the given time span, and
             # then for each (user_id, access_token, ip) tuple in that range
