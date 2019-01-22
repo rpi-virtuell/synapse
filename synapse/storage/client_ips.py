@@ -168,7 +168,6 @@ class ClientIpStore(background_updates.BackgroundUpdateStore):
                     SELECT user_id, access_token, ip
                     FROM user_ips
                     WHERE ? <= last_seen AND last_seen < ?
-                    ORDER BY last_seen
                 ) c
                 INNER JOIN user_ips USING (user_id, access_token, ip)
                 GROUP BY user_id, access_token, ip
