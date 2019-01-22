@@ -145,9 +145,9 @@ class ClientIpStore(background_updates.BackgroundUpdateStore):
             # delete the last batch.
             last = True
 
-            # We fake not having an upper bound by using a future date, by
-            # just multiplying the current time by two....
-            last_seen = int(self.clock.time_msec()) * 2
+            # We fake not having an upper bound by using "now". This is fine
+            # because we'll not have inserted any duplicates after "now".
+            last_seen = self.clock.time_msec()
         else:
             last = False
 
